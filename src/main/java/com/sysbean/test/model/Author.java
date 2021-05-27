@@ -17,7 +17,7 @@ public class Author {
 
     private String authorName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "book_id", nullable = false, foreignKey = @ForeignKey(name = "fk_author_book"))
     private Book book;
 

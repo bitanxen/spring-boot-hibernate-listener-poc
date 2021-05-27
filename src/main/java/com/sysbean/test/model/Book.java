@@ -3,6 +3,12 @@ package com.sysbean.test.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import com.sysbean.test.config.MaterializeAggregator;
+import com.sysbean.test.service.AggregatorServiceImpl;
+import com.sysbean.test.service.BookDynamicAggregator;
+import com.sysbean.test.service.DynamicAggregator;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +18,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@MaterializeAggregator(name="book_aggregator", aggregator = BookDynamicAggregator.class)
 public class Book {
 
     @Id
@@ -22,7 +29,7 @@ public class Book {
 
     private String bookDescription;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "book")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "book")
     private Set<Author> authors = new HashSet<>();
 
     public Book(String bookName, String bookDescription, List<String> authors) {

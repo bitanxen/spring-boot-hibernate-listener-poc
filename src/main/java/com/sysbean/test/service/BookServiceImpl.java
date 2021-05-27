@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Service("dbBookService")
 @Slf4j
 public class BookServiceImpl implements BookService {
 
@@ -31,7 +31,8 @@ public class BookServiceImpl implements BookService {
         return convertIntoDTO(bookRepository.save(book));
     }
 
-    private BookDTO convertIntoDTO(Book book) {
+    @Override
+    public BookDTO convertIntoDTO(Book book) {
         if(book == null)
             return null;
 
